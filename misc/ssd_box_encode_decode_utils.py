@@ -864,7 +864,10 @@ class SSDBoxEncoder:
             # use the same default index order, which is C-like index ordering)
 
             # print 'box shape',boxes.shape
-            boxes = np.reshape(boxes, (batch_size, -1, 4))
+            try:
+                boxes = np.reshape(boxes, (batch_size, -1, 4))
+            except ValueError:
+                print("error")
             boxes_batch.append(boxes)
 
         # Concatenate the anchor tensors from the individual layers to one.
